@@ -27,9 +27,11 @@ public class TestMyArrayList {
         myList.add(3);
         myList.add(7);
         myList.sortBubble();
-        Assert.assertEquals(myList.get(0), 3);
-        Assert.assertEquals(myList.get(1), 7);
-        Assert.assertEquals(myList.get(2), 10);
+        Assert.assertEquals((long) myList.get(0), 3);
+        Assert.assertEquals((long) myList.get(1), 7);
+        Assert.assertEquals((long) myList.get(2), 10);
+        //при изменении в MyArrayList возвращаемого значения метода get c Comparable на E касты пришлось делать в тестах
+        //хотя можно использовать другие утверждения, как в следующем тесте
     }
 
     @Test
@@ -39,9 +41,9 @@ public class TestMyArrayList {
         myList.add(3);
         myList.add(7);
         myList.sortSelect();
-        Assert.assertEquals(myList.get(0), 3);
-        Assert.assertEquals(myList.get(1), 7);
-        Assert.assertEquals(myList.get(2), 10);
+        Assert.assertThat(myList.get(0), Is.is(3));
+        Assert.assertThat(myList.get(1), Is.is(7));
+        Assert.assertThat(myList.get(2), Is.is(10));
     }
 
     @Test
@@ -51,9 +53,9 @@ public class TestMyArrayList {
         myList.add(3);
         myList.add(7);
         myList.sortInsert();
-        Assert.assertEquals(myList.get(0), 3);
-        Assert.assertEquals(myList.get(1), 7);
-        Assert.assertEquals(myList.get(2), 10);
+        Assert.assertThat(myList.get(0), Is.is(3));
+        Assert.assertThat(myList.get(1), Is.is(7));
+        Assert.assertThat(myList.get(2), Is.is(10));
     }
 
 }

@@ -2,7 +2,7 @@ package lesson2;
 
 import java.util.Arrays;
 
-public class MyArrayList<E extends Comparable> implements MyList{
+public class MyArrayList<E extends Comparable> implements MyList, Cloneable{
     private static final int DEFAULT_SIZE = 16;
     private static final int INVALID_INDEX = -1;
 
@@ -18,7 +18,7 @@ public class MyArrayList<E extends Comparable> implements MyList{
     }
 
     @Override
-    public Comparable get(int index) {
+    public E get(int index) {
         if(index > size)
             return null;
         return data[index];
@@ -107,6 +107,12 @@ public class MyArrayList<E extends Comparable> implements MyList{
             }
             data[in] = tmp;
         }
+    }
+
+    public MyArrayList<E> clone() throws CloneNotSupportedException{
+        MyArrayList<E> dest = (MyArrayList) super.clone();
+        dest.data = data.clone();
+        return dest;
     }
 
     private void flip(int index1, int index2) {

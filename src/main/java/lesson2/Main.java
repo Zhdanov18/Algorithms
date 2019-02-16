@@ -19,22 +19,30 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        MyArrayList<Integer> myList1 = new MyArrayList(listSize);
-        fillMyList(myList1);
+        MyArrayList<Integer>[] myList = new MyArrayList[3];
+        for (int i = 0; i < myList.length; i++) {
+            myList[i] = new MyArrayList<Integer>(listSize);
+        }
+        fillMyList(myList[0]);
+
+        try {
+            for (int i = 1; i < myList.length; i++) {
+                myList[i] = myList[0].clone();
+            }
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
         long start = System.nanoTime();
-        myList1.sortBubble();
+        myList[0].sortBubble();
         timePrint("Пузырьковая сортировка", start);
 
-        MyArrayList<Integer> myList2 = new MyArrayList(listSize);
-        fillMyList(myList2);
         start = System.nanoTime();
-        myList2.sortSelect();
+        myList[1].sortSelect();
         timePrint("Сортировка выбором", start);
 
-        MyArrayList<Integer> myList3 = new MyArrayList(listSize);
-        fillMyList(myList3);
         start = System.nanoTime();
-        myList3.sortInsert();
+        myList[2].sortInsert();
         timePrint("Сортировка вставкой", start);
     }
 }
